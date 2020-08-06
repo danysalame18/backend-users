@@ -18,6 +18,9 @@ mongoose.connect(
 .then(()=> console.log('Connected to DB'))
 .catch((err)=> console.log('Error on connection', err))
 
+app.get('./', (request, response)=>{
+    response.json({message: 'OK'})
+})
 app.use('/api/v1', require('../routes'))
 
 module.exports = { app }
