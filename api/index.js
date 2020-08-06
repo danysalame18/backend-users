@@ -1,7 +1,7 @@
 const express = require('express');
 const app = express();
 const cors = require('cors');
-const { config } = require('../config');
+const config = require('../config');
 const mongoose = require('mongoose');
 
 // SET HERE YOUR CORS POLICY
@@ -12,9 +12,12 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json({ extended: true }));
 
 mongoose.connect(
-    config.db.url,
+    config.db_url,
     { useNewUrlParser: true, useUnifiedTopology: true },
 )
 .then(()=> console.log('Connected to DB'))
 .catch((err)=> console.log('Error on connection', err))
+
+app.use('/api/v1', require('../routes'))
+
 module.exports = { app }
